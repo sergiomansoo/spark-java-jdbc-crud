@@ -2,7 +2,8 @@
 Projeto prático desenvolvido para consolidar conceitos de Back-end e persistência de dados. A ideia foi criar uma API simples e funcional para gerenciar produtos, aplicando padrões de organização que facilitam a manutenção do código.
 
 Optei pelo Spark Java para compreender o funcionamento interno de uma aplicação antes de utilizar as abstrações do Spring Boot. Essa escolha permitiu configurar manualmente as rotas, a conexão JDBC e o tratamento de JSON, consolidando os fundamentos de uma API REST.
-🛠️ Tecnologias
+
+## 🛠️ Tecnologias
 Java 17 e Spark Java (Microframework).
 
 PostgreSQL com integração via JDBC.
