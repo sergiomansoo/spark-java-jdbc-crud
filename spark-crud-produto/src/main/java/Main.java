@@ -2,7 +2,7 @@ import static spark.Spark.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Configura a porta do servidor Spark (ex: 4567)
+        // Configura a porta do servidor Spark
         port(4567);
 
         // Inicializa o serviço de produtos, que configura as rotas

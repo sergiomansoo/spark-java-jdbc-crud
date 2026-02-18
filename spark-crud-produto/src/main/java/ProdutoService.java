@@ -24,7 +24,7 @@
 	 
 	        post("/produtos", (request, response) -> {
 	            response.type("application/json");
-	            produto newProduto = gson.fromJson(request.body(), produto.class);
+	            Produto newProduto = gson.fromJson(request.body(), Produto.class);
 	            int id = produtoDAO.insert(newProduto);
 	            if (id != -1) {
 	                newProduto.setId(id); // Define o ID gerado pelo banco
@@ -40,7 +40,7 @@
 	        get("/produtos/:id", (request, response) -> {
 	            response.type("application/json");
 	            int id = Integer.parseInt(request.params(":id"));
-	            produto produto = produtoDAO.get(id);
+	            Produto produto = produtoDAO.get(id);
 	            if (produto != null) {
 	                return gson.toJson(produto);
 	            } else {
@@ -52,7 +52,7 @@
 	        // R (Read All) - Obter todos os produtos
 	        get("/produtos", (request, response) -> {
 	            response.type("application/json");
-	            List<produto> produtos = produtoDAO.getAll();
+	            List<Produto> produtos = produtoDAO.getAll();
 	            return gson.toJson(produtos);
 	        });
 
@@ -60,7 +60,7 @@
 	        put("/produtos/:id", (request, response) -> {
 	            response.type("application/json");
 	            int id = Integer.parseInt(request.params(":id"));
-	            produto produtoToUpdate = gson.fromJson(request.body(), produto.class);
+	            Produto produtoToUpdate = gson.fromJson(request.body(), Produto.class);
 	            produtoToUpdate.setId(id); // Garante que o ID do objeto corresponde ao ID da URL
 
 	            if (produtoDAO.update(produtoToUpdate)) {
@@ -83,15 +83,6 @@
 	                response.status(404); // Not Found
 	                return gson.toJson(new Message("Produto não encontrado para exclusão."));
 	            }
-	        });
-
-	        // Garante que o DAO seja fechado ao parar a aplicação
-	        before((request, response) -> {
-	            // Lógica para interceptar requisições, se necessário
-	        });
-
-	        after((request, response) -> {
-	            // Lógica após as requisições, se necessário
 	        });
 
 	        exception(Exception.class, (e, request, response) -> {

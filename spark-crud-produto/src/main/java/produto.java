@@ -1,18 +1,18 @@
-	public class produto {
+	public class Produto {
 	    private int id;
 	    private String nome;
 	    private String descricao;
 	    private double preco;
 
 	    // Construtor para criar um novo produto (sem ID, pois o DB gera)
-	    public produto(String nome, String descricao, double preco) {
+	    public Produto(String nome, String descricao, double preco) {
 	        this.nome = nome;
 	        this.descricao = descricao;
 	        this.preco = preco;
 	    }
 
 	    // Construtor para recuperar um produto do DB (com ID)
-	    public produto(int id, String nome, String descricao, double preco) {
+	    public Produto(int id, String nome, String descricao, double preco) {
 	        this.id = id;
 	        this.nome = nome;
 	        this.descricao = descricao;

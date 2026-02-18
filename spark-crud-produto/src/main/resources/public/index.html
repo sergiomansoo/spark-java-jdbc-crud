@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -106,7 +106,7 @@
                 try {
                     const response = await fetch(API_URL);
                     if (!response.ok) {
-                        // O erro 500 será capturado aqui
+                      
                         throw new Error(`Falha ao buscar produtos. Status: ${response.status}`);
                     }
                     const produtos = await response.json();

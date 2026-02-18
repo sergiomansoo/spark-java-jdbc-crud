@@ -14,7 +14,7 @@ public class ProdutoDAO {
     public ProdutoDAO() {
         try {
             Class.forName("org.postgresql.Driver"); // Carrega o driver JDBC
-            // Substitua 'jdbc:postgresql://localhost:5432/exercicio_spark', 'seu_usuario' e 'sua_senha' pelos seus dados
+           
             conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/exercicio_spark", "postgres", "postgres");
             System.out.println("Conexão com o PostgreSQL estabelecida com sucesso!");
         } catch (ClassNotFoundException e) {
@@ -41,7 +41,7 @@ public class ProdutoDAO {
 
 
     // C (Create) - Insere um novo produto no banco de dados
-    public int insert(produto produto) {
+    public int insert(Produto produto) {
         String sql = "INSERT INTO produto (nome, descricao, preco) VALUES (?, ?, ?)";
         try (PreparedStatement statement = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, produto.getNome());
@@ -63,7 +63,7 @@ public class ProdutoDAO {
     }
 
     // R (Read) - Busca um produto pelo ID
-    public produto get(int id) {
+    public Produto get(int id) {
         String sql = "SELECT id, nome, descricao, preco FROM produto WHERE id = ?";
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setInt(1, id);
@@ -72,7 +72,7 @@ public class ProdutoDAO {
                     String nome = resultSet.getString("nome");
                     String descricao = resultSet.getString("descricao");
                     double preco = resultSet.getDouble("preco");
-                    return new produto(id, nome, descricao, preco);
+                    return new Produto(id, nome, descricao, preco);
                 }
             }
         } catch (SQLException e) {
@@ -83,8 +83,8 @@ public class ProdutoDAO {
     }
 
     // R (Read All) - Busca todos os produtos
-    public List<produto> getAll() {
-        List<produto> produtos = new ArrayList<>();
+    public List<Produto> getAll() {
+        List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT id, nome, descricao, preco FROM produto ORDER BY id";
         try (Statement statement = conexao.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
@@ -93,7 +93,7 @@ public class ProdutoDAO {
                 String nome = resultSet.getString("nome");
                 String descricao = resultSet.getString("descricao");
                 double preco = resultSet.getDouble("preco");
-                produtos.add(new produto(id, nome, descricao, preco));
+                produtos.add(new Produto(id, nome, descricao, preco));
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar todos os produtos: " + e.getMessage());
@@ -103,7 +103,7 @@ public class ProdutoDAO {
     }
 
     // U (Update) - Atualiza um produto existente
-    public boolean update(produto produto) {
+    public boolean update(Produto produto) {
         String sql = "UPDATE produto SET nome = ?, descricao = ?, preco = ? WHERE id = ?";
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setString(1, produto.getNome());
